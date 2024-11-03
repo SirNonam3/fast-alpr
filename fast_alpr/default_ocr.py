@@ -86,6 +86,6 @@ class DefaultOCR(BaseOCR):
         plate_text = plate_text.pop().replace("_", "")
         return OcrResult(
             text=plate_text,
-            confidence=np.mean(probabilities),
+            confidence=float(np.mean(probabilities)),
             padding_symbol="_",
         )
