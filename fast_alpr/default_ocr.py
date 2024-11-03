@@ -70,7 +70,7 @@ class DefaultOCR(BaseOCR):
             cropped_plate: The cropped image of the license plate in BGR format.
 
         Returns:
-            OcrResult: An object containing the recognized text and per-character confidences.
+            OcrResult: An object containing the recognized text and per-character confidence.
         """
         if cropped_plate is None:
             return None
@@ -80,8 +80,12 @@ class DefaultOCR(BaseOCR):
             raise TypeError(f"Expected plate_text to be a list, got {type(plate_text).__name__}")
         if not isinstance(probabilities, np.ndarray):
             raise TypeError(
-                f"Expected probabilities to be a numpy ndarray, got {type(probabilities).__name__}")
+                f"Expected probabilities to be a numpy ndarray, got {type(probabilities).__name__}"
+            )
         # fast_plate_ocr uses '_' padding symbol
+        plate_text = plate_text.pop().replace("_", "")
         return OcrResult(
-            text=plate_text.pop(), confidences=probabilities.tolist(), padding_symbol="_"
+            text=plate_text,
+            confidence=np.mean(probabilities),
+            padding_symbol="_",
         )

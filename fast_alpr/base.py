@@ -26,7 +26,7 @@ class DetectionResult:
 @dataclass(frozen=True)
 class OcrResult:
     text: str
-    confidences: list[float]
+    confidence: float | list[float]
     padding_symbol: str | None = None
 
 
