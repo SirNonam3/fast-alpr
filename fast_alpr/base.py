@@ -27,7 +27,6 @@ class DetectionResult:
 class OcrResult:
     text: str
     confidence: float | list[float]
-    padding_symbol: str | None = None
 
 
 class BaseDetector(ABC):

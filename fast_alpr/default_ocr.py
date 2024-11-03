@@ -84,8 +84,4 @@ class DefaultOCR(BaseOCR):
             )
         # fast_plate_ocr uses '_' padding symbol
         plate_text = plate_text.pop().replace("_", "")
-        return OcrResult(
-            text=plate_text,
-            confidence=float(np.mean(probabilities)),
-            padding_symbol="_",
-        )
+        return OcrResult(text=plate_text, confidence=float(np.mean(probabilities)))
