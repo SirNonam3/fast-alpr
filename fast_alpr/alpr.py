@@ -3,7 +3,9 @@ ALPR module.
 """
 
 import os
+import statistics
 from collections.abc import Sequence
+from dataclasses import dataclass
 from typing import Literal
 
 import cv2
@@ -12,12 +14,22 @@ import onnxruntime as ort
 from fast_plate_ocr.inference.hub import OcrModel
 from open_image_models.detection.core.hub import PlateDetectorModel
 
-from fast_alpr.base import BaseDetector, BaseOCR
+from fast_alpr.base import BaseDetector, BaseOCR, DetectionResult, OcrResult
 from fast_alpr.default_detector import DefaultDetector
 from fast_alpr.default_ocr import DefaultOCR
 
-# pylint: disable=too-many-arguments
+# pylint: disable=too-many-arguments, too-many-locals
 # ruff: noqa: PLR0913
+
+
+@dataclass(frozen=True)
+class ALPRResult:
+    """
+    Dataclass to hold the results of detection and OCR for a license plate.
+    """
+
+    detection: DetectionResult
+    ocr: OcrResult | None
 
 
 class ALPR:
@@ -86,55 +98,71 @@ class ALPR:
             force_download=ocr_force_download,
         )
 
-    def predict(self, frame: np.ndarray) -> list[str]:
+    def predict(self, frame: np.ndarray | str) -> list[ALPRResult]:
         """
         Returns all recognized license plates from a frame.
 
         Parameters:
-            frame: Unprocessed frame (Colors in order: BGR).
+            frame: Unprocessed frame (Colors in order: BGR) or image path.
 
         Returns:
-            A list of all recognized license plates.
+            A list of ALPRResult objects containing detection and OCR results.
         """
+        if isinstance(frame, str):
+            img_path = frame
+            frame = cv2.imread(img_path)
+            if frame is None:
+                raise ValueError(f"Failed to load image from path: {img_path}")
+
         plate_detections = self.detector.predict(frame)
-        recognized_plates = []
+        alpr_results = []
         for detection in plate_detections:
             bbox = detection.bounding_box
-            x1, y1, x2, y2 = bbox.x1, bbox.y1, bbox.x2, bbox.y2
+            x1, y1 = max(bbox.x1, 0), max(bbox.y1, 0)
+            x2, y2 = min(bbox.x2, frame.shape[1]), min(bbox.y2, frame.shape[0])
             cropped_plate = frame[y1:y2, x1:x2]
             ocr_result = self.ocr.predict(cropped_plate)
-            if ocr_result is None or not ocr_result.text or not ocr_result.confidences:
-                continue
-            # Remove padding symbols if any
-            plate_text = ocr_result.text.replace(ocr_result.padding_symbol or "", "")
-            recognized_plates.append(plate_text)
-        return recognized_plates
+            alpr_result = ALPRResult(detection=detection, ocr=ocr_result)
+            alpr_results.append(alpr_result)
+        return alpr_results
 
-    def draw_predictions(self, frame: np.ndarray) -> np.ndarray:
+    def draw_predictions(self, frame: np.ndarray | str) -> np.ndarray:
         """
         Draws detections and OCR results on the frame.
 
         Parameters:
-            frame: The original frame.
+            frame: The original frame or image path.
 
         Returns:
             The frame with detections and OCR results drawn.
         """
-        plate_detections = self.detector.predict(frame)
-        for detection in plate_detections:
+        # If frame is a string, assume it's an image path and load it
+        if isinstance(frame, str):
+            img_path = frame
+            frame = cv2.imread(img_path)
+            if frame is None:
+                raise ValueError(f"Failed to load image from path: {img_path}")
+
+        # Get ALPR results
+        alpr_results = self.predict(frame)
+
+        for result in alpr_results:
+            detection = result.detection
+            ocr_result = result.ocr
             bbox = detection.bounding_box
             x1, y1, x2, y2 = bbox.x1, bbox.y1, bbox.x2, bbox.y2
             # Draw the bounding box
             cv2.rectangle(frame, (x1, y1), (x2, y2), (36, 255, 12), 2)
-            # Perform OCR on the cropped plate
-            cropped_plate = frame[y1:y2, x1:x2]
-            ocr_result = self.ocr.predict(cropped_plate)
-            if ocr_result is None or not ocr_result.text or not ocr_result.confidences:
+            if ocr_result is None or not ocr_result.text or not ocr_result.confidence:
                 continue
             # Remove padding symbols if any
-            plate_text = ocr_result.text.replace(ocr_result.padding_symbol or "", "")
-            avg_confidence = np.mean(ocr_result.confidences)
-            display_text = f"{plate_text} {avg_confidence * 100:.2f}%"
+            plate_text = ocr_result.text
+            confidence: float = (
+                statistics.mean(ocr_result.confidence)
+                if isinstance(ocr_result.confidence, list)
+                else ocr_result.confidence
+            )
+            display_text = f"{plate_text} {confidence * 100:.2f}%"
             font_scale = 1.25
             # Draw black background for better readability
             cv2.putText(
