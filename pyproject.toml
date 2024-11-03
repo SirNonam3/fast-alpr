@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Fast Automatic License Plate Recognition."
 authors = ["ankandrew <61120139+ankandrew@users.noreply.github.com>"]
 readme = "README.md"
+license = {file = "LICENSE"}
 keywords = [
     "image-processing",
     "computer-vision",
