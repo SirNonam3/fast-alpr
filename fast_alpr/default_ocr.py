@@ -76,5 +76,12 @@ class DefaultOCR(BaseOCR):
             return None
         gray_plate = cv2.cvtColor(cropped_plate, cv2.COLOR_BGR2GRAY)
         plate_text, probabilities = self.ocr_model.run(gray_plate, return_confidence=True)
+        if not isinstance(plate_text, list):
+            raise TypeError(f"Expected plate_text to be a list, got {type(plate_text).__name__}")
+        if not isinstance(probabilities, np.ndarray):
+            raise TypeError(
+                f"Expected probabilities to be a numpy ndarray, got {type(probabilities).__name__}")
         # fast_plate_ocr uses '_' padding symbol
-        return OcrResult(text=plate_text, confidences=probabilities, padding_symbol="_")
+        return OcrResult(
+            text=plate_text.pop(), confidences=probabilities.tolist(), padding_symbol="_"
+        )
