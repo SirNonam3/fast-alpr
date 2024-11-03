@@ -110,7 +110,7 @@ Para usarlo en tu proyecto podes leer de config o cread un dict, es lo mismo:
 ### Forma #1 (cfg)
 
 ```python
-from alpr.alpr import ALPR
+from fast_alpr.alpr import ALPR
 import cv2
 import yaml
 
@@ -125,7 +125,7 @@ print(predicciones)
 ### Forma #2 (dict)
 
 ```python
-from alpr.alpr import ALPR
+from fast_alpr.alpr import ALPR
 import cv2
 
 im = cv2.imread('assets/prueba.jpg')

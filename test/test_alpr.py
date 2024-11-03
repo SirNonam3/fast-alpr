@@ -7,7 +7,7 @@ from pathlib import Path
 import cv2
 import pytest
 
-from alpr.alpr import ALPR
+from fast_alpr.alpr import ALPR
 
 ASSETS_DIR = Path(__file__).resolve().parent.parent / "assets"
 

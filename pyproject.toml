@@ -1,16 +1,14 @@
 [tool.poetry]
-name = "alpr"
+name = "fast-alpr"
 version = "0.1.0"
-description = "ALPR."
+description = "Fast Automatic License Plate Recognition."
 authors = ["ankandrew <61120139+ankandrew@users.noreply.github.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
 opencv-python = "^4.9.0.80"
-pyyaml = ">=5.0.0"
-tensorflow = ">=2.0.0"
-fast-plate-ocr = "^0.1.2"
+fast-plate-ocr = "^0.2.0"
 open-image-models = "^0.1.0"
 
 [tool.poetry.group.test.dependencies]
