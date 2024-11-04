@@ -158,7 +158,7 @@ To start contributing or to begin development, you can follow these steps:
 
 1. Clone repo
     ```shell
-    git clone https://github.com/ankandrew/open-image-models.git
+    git clone https://github.com/ankandrew/fast-alpr.git
     ```
 2. Install all dependencies using [Poetry](https://python-poetry.org/docs/#installation):
     ```shell
