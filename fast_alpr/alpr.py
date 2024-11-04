@@ -47,7 +47,7 @@ class ALPR:
         detector_conf_thresh: float = 0.4,
         detector_providers: Sequence[str | tuple[str, dict]] | None = None,
         detector_sess_options: ort.SessionOptions = None,
-        ocr_hub_ocr_model: OcrModel | None = "european-plates-mobile-vit-v2-model",
+        ocr_model: OcrModel | None = "european-plates-mobile-vit-v2-model",
         ocr_device: Literal["cuda", "cpu", "auto"] = "auto",
         ocr_providers: Sequence[str | tuple[str, dict]] | None = None,
         ocr_sess_options: ort.SessionOptions | None = None,
@@ -66,7 +66,7 @@ class ALPR:
             detector_conf_thresh: Confidence threshold for the detector.
             detector_providers: Execution providers for the detector.
             detector_sess_options: Session options for the detector.
-            ocr_hub_ocr_model: The name of the OCR model from the model hub. This can be none and
+            ocr_model: The name of the OCR model from the model hub. This can be none and
                 `ocr_model_path` and `ocr_config_path` parameters are expected to pass them to
                 `fast-plate-ocr` library.
             ocr_device: The device to run the OCR model on ("cuda", "cpu", or "auto").
@@ -89,7 +89,7 @@ class ALPR:
 
         # Initialize the OCR
         self.ocr = ocr or DefaultOCR(
-            hub_ocr_model=ocr_hub_ocr_model,
+            hub_ocr_model=ocr_model,
             device=ocr_device,
             providers=ocr_providers,
             sess_options=ocr_sess_options,

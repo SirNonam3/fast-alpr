@@ -19,7 +19,7 @@ def test_default_alpr(img_path: Path, expected_plates: set[str]) -> None:
     im = cv2.imread(str(img_path))
     alpr = ALPR(
         detector_model="yolo-v9-t-384-license-plate-end2end",
-        ocr_hub_ocr_model="european-plates-mobile-vit-v2-model",
+        ocr_model="european-plates-mobile-vit-v2-model",
     )
     actual_result = alpr.predict(im)
     actual_plates = {x.ocr.text for x in actual_result if x.ocr is not None}
