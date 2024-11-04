@@ -72,7 +72,7 @@ class ALPR:
             ocr_device: The device to run the OCR model on ("cuda", "cpu", or "auto").
             ocr_providers: Execution providers for the OCR. If None, the default providers are used.
             ocr_sess_options: Session options for the OCR. If None, default session options are
-             used.
+                used.
             ocr_model_path: Custom model path for the OCR. If None, the model is downloaded from the
                 hub or cache.
             ocr_config_path: Custom config path for the OCR. If None, the default configuration is
