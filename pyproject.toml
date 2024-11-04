@@ -1,17 +1,46 @@
 [tool.poetry]
-name = "alpr"
+name = "fast-alpr"
 version = "0.1.0"
-description = "ALPR."
+description = "Fast Automatic License Plate Recognition."
 authors = ["ankandrew <61120139+ankandrew@users.noreply.github.com>"]
 readme = "README.md"
+license = "MIT"
+keywords = [
+    "image-processing",
+    "computer-vision",
+    "deep-learning",
+    "object-detection",
+    "plate-detection",
+    "license-plate-ocr",
+    "onnx",
+]
+classifiers = [
+    "Typing :: Typed",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
 opencv-python = "^4.9.0.80"
-pyyaml = ">=5.0.0"
-tensorflow = ">=2.0.0"
-fast-plate-ocr = "^0.1.2"
+fast-plate-ocr = "^0.2.0"
 open-image-models = "^0.1.0"
+
+# Optional packages for creating the docs
+mkdocs-material = { version = "*", optional = true }
+mkdocstrings = { version = "*", extras = ["python"], optional = true }
+mike = { version = "*", optional = true }
+
+[tool.poetry.extras]
+docs = ["mkdocs-material", "mkdocstrings", "mike"]
 
 [tool.poetry.group.test.dependencies]
 pytest = "*"

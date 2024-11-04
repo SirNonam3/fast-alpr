@@ -1,5 +1,5 @@
 # Directories
-SRC_PATHS := alpr/ test/
+SRC_PATHS := fast_alpr/ test/
 
 # Tasks
 .PHONY: help

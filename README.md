@@ -1,160 +1,178 @@
-# ConvALPR
+# FastALPR
 
-[![Actions status](https://github.com/ankandrew/ConvALPR/actions/workflows/test.yaml/badge.svg)](https://github.com/ankandrew/ConvALPR/actions)
+[![Actions status](https://github.com/ankandrew/fast-alpr/actions/workflows/test.yaml/badge.svg)](https://github.com/ankandrew/fast-alpr/actions)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
-[![image](https://img.shields.io/pypi/l/fast-plate-ocr.svg)](https://pypi.python.org/pypi/fast-plate-ocr)
+[![ONNX Model](https://img.shields.io/badge/model-ONNX-blue?logo=onnx&logoColor=white)](https://onnx.ai/)
+[![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://ankandrew.github.io/fast-alpr/)
+[![Python Version](https://img.shields.io/pypi/pyversions/fast-alpr)](https://www.python.org/)
+[![GitHub version](https://img.shields.io/github/v/release/ankandrew/fast-alpr)](https://github.com/ankandrew/fast-alpr/releases)
+[![License](https://img.shields.io/github/license/ankandrew/fast-alpr)](./LICENSE)
 
-[![Alt Text](assets/alpr.gif)](https://youtu.be/-TPJot7-HTs?t=652)
+[![ALPR Demo Animation](https://raw.githubusercontent.com/ankandrew/fast-alpr/f672fbbec2ddf86aabfc2afc0c45d1fa7612516c/assets/alpr.gif)](https://youtu.be/-TPJot7-HTs?t=652)
 
-<!-- TOC -->
-* [ConvALPR](#convalpr)
-  * [Localizador](#localizador)
-  * [Reconocedor (ROC/OCR)](#reconocedor-rococr)
-  * [Como usarlo](#como-usarlo)
-    * [Instalar dependencias](#instalar-dependencias)
-    * [Visualizar solo localizador](#visualizar-solo-localizador)
-  * [Reconocedor Automatico](#reconocedor-automatico)
-    * [Config](#config)
-    * [Ejemplo visualizar ALPR](#ejemplo-visualizar-alpr)
-    * [Guarda en Base de Datos sin visualizar](#guarda-en-base-de-datos-sin-visualizar)
-  * [Python API](#python-api)
-    * [Forma #1 (cfg)](#forma-1-cfg)
-    * [Forma #2 (dict)](#forma-2-dict)
-    * [Notas](#notas)
-  * [TODO](#todo)
-<!-- TOC -->
+**FastALPR** is a high-performance, customizable Automatic License Plate Recognition (ALPR) system. We offer fast and
+efficient ONNX models by default, but you can easily swap in your own models if needed.
 
-**ConvALPR** es un Reconocedor Automatico de Patentes Vehiculares, que utiliza **Redes Neuronales Convolucionales**. A
-diferencia de metodos tradicionales, este approach puede reconocer patentes con obstrucciones/diferencia de
-brillo/letras borrosas, etc. ConvALPR consiste de dos procesos: **localizar** (detector de objetos) y **reconocedor** (
-Reconocimiento Optico de Caracteres). Ambas usan solamente **Redes Convolucionales/ConvNets/CNNs**.
+For Optical Character Recognition (**OCR**), we use [fast-plate-ocr](https://github.com/ankandrew/fast-plate-ocr) by
+default, and for **license plate detection**, we
+use [open-image-models](https://github.com/ankandrew/open-image-models). However, you can integrate any OCR or detection
+model of your choice.
 
-![Proceso ALPR](assets/proceso.png)
+## 📋 Table of Contents
 
-## Localizador
+* [✨ Features](#-features)
+* [📦 Installation](#-installation)
+* [🚀 Quick Start](#-quick-start)
+* [🛠️ Customization and Flexibility](#-customization-and-flexibility)
+* [📖 Documentation](#-documentation)
+* [🤝 Contributing](#-contributing)
+* [🙏 Acknowledgements](#-acknowledgements)
+* [📫 Contact](#-contact)
 
-![Demo yolo v9 tiny](assets/demo_localizador.gif)
+## ✨ Features
 
-Para el **localizador** se usa **yolo v9 tiny**, para lograr que el detector corra en **tiempo real**. Este detector de
-objetos se entrenó con patentes (ni una sola de Argentina), aun así no tiene problemas en localizarlas con alta
-precisión. Más detalles del entrenamiento del detector **[acá](https://github.com/ankandrew/LocalizadorPatentes)**.
+- **High Accuracy**: Uses advanced models for precise license plate detection and OCR.
+- **Customizable**: Easily switch out detection and OCR models.
+- **Easy to Use**: Quick setup with a simple API.
+- **Out-of-the-Box Models**: Includes ready-to-use detection and OCR models
+- **Fast Performance**: Optimized with ONNX Runtime for speed.
 
-Hay **4** versiones del localizador de patentes, misma arquitectura (**yolo v9 tiny**), pero con distinta resolución de
-entrada. Los modelos usan resolución de entrada de {*256x256*, *384x384*, *512x512*, *640x640*}, donde a mayor
-resolución **mayor es la precisión** (y puede detectar mejor patentes alejadas) pero mayor es el tiempo de inferencia (
-es **más lento**).
+## 📦 Installation
 
-🔥 Ahora los modelos se usan desde **[Open Image Models](https://github.com/ankandrew/open-image-models)**, una nueva
-fuente de modelos optimizados que facilita el uso de detección de objetos en diferentes contextos.
-
-## Reconocedor (ROC/OCR)
-
-![Demo OCR](https://raw.githubusercontent.com/ankandrew/fast-plate-ocr/4a7dd34c9803caada0dc50a33b59487b63dd4754/extra/demo.gif)
-
-Para el **reconocedor de caracteres** [OCR](https://es.wikipedia.org/wiki/Reconocimiento_%C3%B3ptico_de_caracteres) de
-las patentes, se diseñaron unos modelos personalizados en TensorFlow Keras.
-
-En este repositorio se pueden encontrar los mismos modelos que [aca](https://github.com/ankandrew/cnn-ocr-lp).
-
-## Como usarlo
-
-### Instalar dependencias
-
-Con python **3.x**:
-
-```
-pip install .
+```bash
+pip install fast-alpr
 ```
 
-Para correr con la **placa de video/GPU** y acelerar la inferencia, instalar
-estos **[requerimientos](https://www.tensorflow.org/install/gpu#software_requirements)**.
+## 🚀 Quick Start
 
-### Visualizar solo localizador
-
-Para probar el **localizador/detector** de patentes (**sin OCR, solo los bounding boxes**) y visualizar las predicciones
-se usa el comando:
-
-```
-python detector_demo.py --fuente-video /path/a/tu/video.mp4 --mostrar-resultados --input-size 608
-```
-
-*Intenta con los distintos modelos {608, 512, 384} para ver cual se ajusta mejor a tu caso*
-
-## Reconocedor Automatico
-
-### Config
-
-La **configuracion** del [ALPR](https://es.wikipedia.org/wiki/Reconocimiento_autom%C3%A1tico_de_matr%C3%ADculas) se
-puede encontrar en [`config.yaml`](config.yaml). Este contiene los ajustes del Reconocedor y Localizador. Las distintas
-opciones estan descriptas en el mismo archivo (que hacen). El modelo de OCR es **independiente** del detector de
-objetos, y cualquiera deberia funcionar bien con cualquiera.
-
-### Ejemplo visualizar ALPR
-
-```
-python reconocedor_automatico.py --cfg config.yaml --demo
-```
-
-### Guarda en Base de Datos sin visualizar
-
-```
-python reconocedor_automatico.py --cfg config.yaml
-```
-
-## Python API
-
-Para usarlo en tu proyecto podes leer de config o cread un dict, es lo mismo:
-
-### Forma #1 (cfg)
+Here's how to get started with FastALPR:
 
 ```python
-from alpr.alpr import ALPR
-import cv2
-import yaml
+from fast_alpr import ALPR
 
-im = cv2.imread('assets/prueba.jpg')
-with open('config.yaml', 'r') as stream:
-    cfg = yaml.safe_load(stream)
-alpr = ALPR(cfg['modelo'])
-predicciones = alpr.predict(im)
-print(predicciones)
-```
-
-### Forma #2 (dict)
-
-```python
-from alpr.alpr import ALPR
-import cv2
-
-im = cv2.imread('assets/prueba.jpg')
+# You can also initialize the ALPR with custom plate detection and OCR models.
 alpr = ALPR(
-    {
-        'resolucion_detector': 512,
-        'confianza_detector': 0.25,
-        'numero_modelo_ocr': 2,
-        'confianza_avg_ocr': .4,
-        'confianza_low_ocr': .35
-    }
+    detector_model="yolo-v9-t-384-license-plate-end2end",
+    ocr_model="european-plates-mobile-vit-v2-model",
 )
-predicciones = alpr.predict(im)
-print(predicciones)
+
+# The "assets/test_image.png" can be found in repo root dit
+alpr_results = alpr.predict("assets/test_image.png")
+print(alpr_results)
 ```
 
-### Notas
+Output:
 
-* **Aclaracion**: Si bien el **localizador** funciona para patentes de cualquier pais el **reconocedor** actual esta
-  hecho especialmente para **Argentina**,
-  si queres **entrenar uno [personalizado](https://github.com/ankandrew/cnn-ocr-lp/wiki/Entrenamiento)**
+<img alt="ALPR Result" height="350" src="https://raw.githubusercontent.com/ankandrew/fast-alpr/5063bd92fdd30f46b330d051468be267d4442c9b/assets/alpr_result.webp" width="700"/>
 
-* *Este trabajo forma parte de un proyecto integrador para la Universidad*
+You can also draw the predictions directly on the image:
 
-## TODO
+```python
+import cv2
 
-- [ ] Ampliar modelos OCR
-- [ ] Compilar para EdgeTPU
-- [ ] Quantizar a FP16
-- [ ] Quantizar a INT8
-- [ ] Optimizar
-- [ ] Aumentar `batch` de OCR
+from fast_alpr import ALPR
+
+# Initialize the ALPR
+alpr = ALPR(
+    detector_model="yolo-v9-t-384-license-plate-end2end",
+    ocr_model="european-plates-mobile-vit-v2-model",
+)
+
+# Load the image
+image_path = "assets/test_image.png"
+frame = cv2.imread(image_path)
+
+# Draw predictions on the image
+annotated_frame = alpr.draw_predictions(frame)
+
+# Display the result
+cv2.imshow("ALPR Result", annotated_frame)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+
+Output:
+
+<img alt="ALPR Draw Predictions" src="https://raw.githubusercontent.com/ankandrew/fast-alpr/0a6076dcb8d9084514fe47e8abaaeb77cae45f8e/assets/alpr_draw_predictions.png"/>
+
+## 🛠️ Customization and Flexibility
+
+FastALPR is designed to be flexible. You can customize the detector and OCR models according to your requirements.
+You can very easily integrate with **Tesseract** OCR to leverage its capabilities:
+
+```python
+import re
+from statistics import mean
+
+import numpy as np
+import pytesseract
+
+from fast_alpr.alpr import ALPR, BaseOCR, OcrResult
+
+
+class PytesseractOCR(BaseOCR):
+    def __init__(self) -> None:
+        """
+        Init PytesseractOCR.
+        """
+
+    def predict(self, cropped_plate: np.ndarray) -> OcrResult | None:
+        if cropped_plate is None:
+            return None
+        # You can change 'eng' to the appropriate language code as needed
+        data = pytesseract.image_to_data(
+            cropped_plate,
+            lang="eng",
+            config="--oem 3 --psm 6",
+            output_type=pytesseract.Output.DICT,
+        )
+        plate_text = " ".join(data["text"]).strip()
+        plate_text = re.sub(r"[^A-Za-z0-9]", "", plate_text)
+        avg_confidence = mean(conf for conf in data["conf"] if conf > 0) / 100.0
+        return OcrResult(text=plate_text, confidence=avg_confidence)
+
+
+alpr = ALPR(detector_model="yolo-v9-t-384-license-plate-end2end", ocr=PytesseractOCR())
+
+alpr_results = alpr.predict("assets/test_image.png")
+print(alpr_results)
+```
+
+> [!TIP]
+> See the [docs](https://ankandrew.github.io/fast-alpr/) for more examples!
+
+## 📖 Documentation
+
+Comprehensive documentation is available [here](https://ankandrew.github.io/fast-alpr/), including detailed API
+references and additional examples.
+
+## 🤝 Contributing
+
+Contributions to the repo are greatly appreciated. Whether it's bug fixes, feature enhancements, or new models,
+your contributions are warmly welcomed.
+
+To start contributing or to begin development, you can follow these steps:
+
+1. Clone repo
+    ```shell
+    git clone https://github.com/ankandrew/fast-alpr.git
+    ```
+2. Install all dependencies using [Poetry](https://python-poetry.org/docs/#installation):
+    ```shell
+    poetry install --all-extras
+    ```
+3. To ensure your changes pass linting and tests before submitting a PR:
+    ```shell
+    make checks
+    ```
+
+## 🙏 Acknowledgements
+
+- [fast-plate-ocr](https://github.com/ankandrew/fast-plate-ocr) for default **OCR** models.
+- [open-image-models](https://github.com/ankandrew/open-image-models) for default plate **detection** models.
+
+## 📫 Contact
+
+For questions or suggestions, feel free to open an issue or reach out through social networks.
