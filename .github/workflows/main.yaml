@@ -2,7 +2,7 @@ name: Test and Deploy
 on:
   push:
     branches:
-      - main
+      - master
     tags:
       - 'v*'
   pull_request:
