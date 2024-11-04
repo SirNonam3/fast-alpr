@@ -97,9 +97,6 @@ Output:
 
 <img alt="ALPR Draw Predictions" src="https://raw.githubusercontent.com/ankandrew/fast-alpr/0a6076dcb8d9084514fe47e8abaaeb77cae45f8e/assets/alpr_draw_predictions.png"/>
 
-> [!TIP]
-> See the [docs](https://ankandrew.github.io/fast-alpr/) for more examples!
-
 ## 🛠️ Customization and Flexibility
 
 FastALPR is designed to be flexible. You can customize the detector and OCR models according to your requirements.
