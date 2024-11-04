@@ -34,6 +34,14 @@ opencv-python = "^4.9.0.80"
 fast-plate-ocr = "^0.2.0"
 open-image-models = "^0.1.0"
 
+# Optional packages for creating the docs
+mkdocs-material = { version = "*", optional = true }
+mkdocstrings = { version = "*", extras = ["python"], optional = true }
+mike = { version = "*", optional = true }
+
+[tool.poetry.extras]
+docs = ["mkdocs-material", "mkdocstrings", "mike"]
+
 [tool.poetry.group.test.dependencies]
 pytest = "*"
 
