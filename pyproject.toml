@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fast-alpr"
-version = "0.1.0"
+version = "0.1.1"
 description = "Fast Automatic License Plate Recognition."
 authors = ["ankandrew <61120139+ankandrew@users.noreply.github.com>"]
 readme = "README.md"
@@ -32,7 +32,7 @@ classifiers = [
 python = ">=3.10,<4.0"
 opencv-python = "^4.9.0.80"
 fast-plate-ocr = "^0.2.0"
-open-image-models = "^0.1.0"
+open-image-models = "^0.2.0"
 
 # Optional packages for creating the docs
 mkdocs-material = { version = "*", optional = true }

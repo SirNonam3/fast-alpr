@@ -905,19 +905,19 @@ sympy = "*"
 
 [[package]]
 name = "open-image-models"
-version = "0.1.0"
+version = "0.2.0"
 description = "Pre-trained image models using ONNX for fast, out-of-the-box inference."
 optional = false
 python-versions = "<4.0,>=3.10"
 files = [
-    {file = "open_image_models-0.1.0-py3-none-any.whl", hash = "sha256:47c2c17abb2f9ec9d757fcf276e1baf973e64094fb3b9394bc2dc94bc2fb2ee5"},
-    {file = "open_image_models-0.1.0.tar.gz", hash = "sha256:0f4175dba4c141f3d673d662085df6b0559978b1de4591289f62cf0b2a2c2c84"},
+    {file = "open_image_models-0.2.0-py3-none-any.whl", hash = "sha256:a4b5c89409dbe373cc2d0f6db7312ec7c9e61caa0c9fbed400d7b8179c8b6eab"},
+    {file = "open_image_models-0.2.0.tar.gz", hash = "sha256:b77ec208fb45e5b74ac3de7b7b4258fa985009168e5222b0cc5dd1aa79bd0c2e"},
 ]
 
 [package.dependencies]
 numpy = ">=1.20"
-onnxruntime = ">=1.19.2"
-onnxruntime-gpu = {version = ">=1.19.2", markers = "sys_platform != \"darwin\""}
+onnxruntime = {version = ">=1.19.2", markers = "sys_platform == \"darwin\" or platform_machine == \"armv7l\" or platform_machine == \"aarch64\""}
+onnxruntime-gpu = {version = ">=1.19.2", markers = "sys_platform != \"darwin\" and (platform_machine != \"armv7l\" and platform_machine != \"aarch64\") and (platform_system == \"Linux\" or platform_system == \"Windows\")"}
 opencv-python = "*"
 rich = "*"
 tqdm = "*"
@@ -1600,4 +1600,4 @@ docs = ["mike", "mkdocs-material", "mkdocstrings"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<4.0"
-content-hash = "74e4ebf34bc4c8036856f6cabc4038918f8767872a1cd3ec7d094c18a4d542e2"
+content-hash = "5e6aeef49c7113c57e2e733131e7319ae6e80ff630b2f1486482021fcc4a2d91"
