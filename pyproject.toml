@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fast-alpr"
-version = "0.1.1"
+version = "0.1.2"
 description = "Fast Automatic License Plate Recognition."
 authors = ["ankandrew <61120139+ankandrew@users.noreply.github.com>"]
 readme = "README.md"
