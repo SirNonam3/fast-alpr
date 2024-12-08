@@ -48,6 +48,9 @@ pip install fast-alpr
 
 ## 🚀 Quick Start
 
+> [!TIP]
+> Try `fast-plate-ocr` pre-trained models in [Hugging Spaces](https://huggingface.co/spaces/ankandrew/fast-alpr).
+
 Here's how to get started with FastALPR:
 
 ```python
