@@ -14,6 +14,7 @@ alpr = ALPR(
 )
 
 # The "assets/test_image.png" can be found in repo root dit
+# You can also pass a NumPy array containing cropped plate image
 alpr_results = alpr.predict("assets/test_image.png")
 print(alpr_results)
 ```
