@@ -47,7 +47,7 @@ class ALPR:
         detector_conf_thresh: float = 0.4,
         detector_providers: Sequence[str | tuple[str, dict]] | None = None,
         detector_sess_options: ort.SessionOptions = None,
-        ocr_model: OcrModel | None = "european-plates-mobile-vit-v2-model",
+        ocr_model: OcrModel | None = "global-plates-mobile-vit-v2-model",
         ocr_device: Literal["cuda", "cpu", "auto"] = "auto",
         ocr_providers: Sequence[str | tuple[str, dict]] | None = None,
         ocr_sess_options: ort.SessionOptions | None = None,
