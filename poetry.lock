@@ -226,13 +226,13 @@ test = ["pytest (>=6)"]
 
 [[package]]
 name = "fast-plate-ocr"
-version = "0.2.0"
+version = "0.3.0"
 description = "Fast & Lightweight OCR for vehicle license plates."
 optional = false
 python-versions = "<4.0,>=3.10"
 files = [
-    {file = "fast_plate_ocr-0.2.0-py3-none-any.whl", hash = "sha256:16c485c512f9ee593ce1669100aa93c132926ed60d4f1acd73bd5f57c0f83353"},
-    {file = "fast_plate_ocr-0.2.0.tar.gz", hash = "sha256:a3cbee1280b4ad41a6402f77891eec433a76e28e8dd0c9283f9d8dd15de7133a"},
+    {file = "fast_plate_ocr-0.3.0-py3-none-any.whl", hash = "sha256:9dcc2ddbb51a6261fedcf5e8c5af9a8907f4a2fa6242dbe4658a491876e89a4b"},
+    {file = "fast_plate_ocr-0.3.0.tar.gz", hash = "sha256:141f6fcefdd43fa688b8252f7e30d45e5aec2d38716e896b9562307fcbb923e8"},
 ]
 
 [package.dependencies]
@@ -1600,4 +1600,4 @@ docs = ["mike", "mkdocs-material", "mkdocstrings"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<4.0"
-content-hash = "5e6aeef49c7113c57e2e733131e7319ae6e80ff630b2f1486482021fcc4a2d91"
+content-hash = "995f846b9ab37153d6595f080f2eea936ab3e1a2093becb0929f602c2abb12a5"
