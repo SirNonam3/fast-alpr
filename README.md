@@ -179,4 +179,4 @@ To start contributing or to begin development, you can follow these steps:
 
 ## 📫 Contact
 
-For questions or suggestions, feel free to open an issue or reach out through social networks.
+For questions or suggestions, feel free to open an issue.
