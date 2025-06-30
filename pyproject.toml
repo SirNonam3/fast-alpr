@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fast-alpr"
-version = "0.1.2"
+version = "0.2.0"
 description = "Fast Automatic License Plate Recognition."
 authors = ["ankandrew <61120139+ankandrew@users.noreply.github.com>"]
 readme = "README.md"
@@ -30,17 +30,22 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
-opencv-python = "^4.9.0.80"
-fast-plate-ocr = "^0.3.0"
-open-image-models = "^0.2.0"
+opencv-python = ">=4.9.0.80"
+fast-plate-ocr = "^1.0.0"
+open-image-models = "^0.4.0"
 
-# Optional packages for creating the docs
-mkdocs-material = { version = "*", optional = true }
-mkdocstrings = { version = "*", extras = ["python"], optional = true }
-mike = { version = "*", optional = true }
+onnxruntime = { version = ">=1.19.2", optional = true }
+onnxruntime-gpu = { version = ">=1.19.2", optional = true }
+onnxruntime-openvino = { version = ">=1.19.2", optional = true }
+onnxruntime-directml = { version = ">=1.19.2", optional = true }
+onnxruntime-qnn = { version = ">=1.19.2", optional = true }
 
 [tool.poetry.extras]
-docs = ["mkdocs-material", "mkdocstrings", "mike"]
+onnx = ["onnxruntime"]
+onnx-gpu = ["onnxruntime-gpu"]
+onnx-openvino = ["onnxruntime-openvino"]
+onnx-directml = ["onnxruntime-directml"]
+onnx-qnn = ["onnxruntime-qnn"]
 
 [tool.poetry.group.test.dependencies]
 pytest = "*"
@@ -50,6 +55,11 @@ mypy = "*"
 ruff = "*"
 pylint = "*"
 types-pyyaml = "*"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs-material = "*"
+mkdocstrings = { version = "*", extras = ["python"] }
+mike = "*"
 
 [tool.ruff]
 line-length = 100

@@ -9,7 +9,7 @@ from typing import Literal
 import cv2
 import numpy as np
 import onnxruntime as ort
-from fast_plate_ocr import ONNXPlateRecognizer
+from fast_plate_ocr import LicensePlateRecognizer
 from fast_plate_ocr.inference.hub import OcrModel
 
 from fast_alpr.base import BaseOCR, OcrResult
@@ -19,7 +19,7 @@ class DefaultOCR(BaseOCR):
     """
     Default OCR class for license plate recognition using ONNX models.
 
-    This class utilizes the `ONNXPlateRecognizer` from the `fast-plate-ocr` package
+    This class utilizes the `LicensePlateRecognizer` from the `fast-plate-ocr` package
     to perform OCR on cropped license plate images.
     """
 
@@ -35,7 +35,7 @@ class DefaultOCR(BaseOCR):
     ) -> None:
         """
         Initialize the DefaultOCR with the specified parameters. Uses `fast-plate-ocr`'s
-        `ONNXPlateRecognizer`
+        `LicensePlateRecognizer`
 
         Parameters:
             hub_ocr_model: The name of the OCR model from the model hub.
@@ -52,13 +52,13 @@ class DefaultOCR(BaseOCR):
             force_download: If True, forces the download of the model and overwrites any existing
              files.
         """
-        self.ocr_model = ONNXPlateRecognizer(
+        self.ocr_model = LicensePlateRecognizer(
             hub_ocr_model=hub_ocr_model,
             device=device,
             providers=providers,
             sess_options=sess_options,
-            model_path=model_path,
-            config_path=config_path,
+            onnx_model_path=model_path,
+            plate_config_path=config_path,
             force_download=force_download,
         )
 
