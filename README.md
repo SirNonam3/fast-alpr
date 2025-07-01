@@ -74,7 +74,7 @@ alpr = ALPR(
     ocr_model="global-plates-mobile-vit-v2-model",
 )
 
-# The "assets/test_image.png" can be found in repo root dit
+# The "assets/test_image.png" can be found in repo root dir
 alpr_results = alpr.predict("assets/test_image.png")
 print(alpr_results)
 ```
