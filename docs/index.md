@@ -20,13 +20,5 @@ model of your choice.
 - **📦 Out-of-the-Box Models**: Includes ready-to-use detection and OCR models
 - **⚡ Fast Performance**: Optimized with ONNX Runtime for speed.
 
-## Installation
-
-To install **FastALPR**, simply do:
-
-```shell
-pip install fast-alpr
-```
-
 <br>
 <br>

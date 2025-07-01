@@ -1,20 +1,28 @@
 # Directories
 SRC_PATHS := fast_alpr/ test/
+YAML_PATHS := .github/ mkdocs.yml
 
 # Tasks
 .PHONY: help
 help:
 	@echo "Available targets:"
 	@echo "  help             : Show this help message"
+	@echo "  install          : Install project with all required dependencies"
 	@echo "  format           : Format code using Ruff format"
 	@echo "  check_format     : Check code formatting with Ruff format"
 	@echo "  ruff             : Run Ruff linter"
+	@echo "  yamllint         : Run yamllint linter"
 	@echo "  pylint           : Run Pylint linter"
 	@echo "  mypy             : Run MyPy static type checker"
 	@echo "  lint             : Run linters (Ruff, Pylint and Mypy)"
 	@echo "  test             : Run tests using pytest"
 	@echo "  checks           : Check format, lint, and test"
 	@echo "  clean            : Clean up caches and build artifacts"
+
+.PHONY: install
+install:
+	@echo "==> Installing project with all required dependencies..."
+	poetry install --with dev,test,docs --extras onnx
 
 .PHONY: format
 format:
@@ -36,6 +44,11 @@ ruff:
 	@echo "=====> Running Ruff..."
 	@poetry run ruff check $(SRC_PATHS)
 
+.PHONY: yamllint
+yamllint:
+	@echo "=====> Running yamllint..."
+	@poetry run yamllint $(YAML_PATHS)
+
 .PHONY: pylint
 pylint:
 	@echo "=====> Running Pylint..."
@@ -47,7 +60,7 @@ mypy:
 	@poetry run mypy $(SRC_PATHS)
 
 .PHONY: lint
-lint: ruff pylint mypy
+lint: ruff yamllint pylint mypy
 
 .PHONY: test
 test:

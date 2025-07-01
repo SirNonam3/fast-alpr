@@ -10,10 +10,10 @@ from fast_alpr import ALPR
 # You can also initialize the ALPR with custom plate detection and OCR models.
 alpr = ALPR(
     detector_model="yolo-v9-t-384-license-plate-end2end",
-    ocr_model="global-plates-mobile-vit-v2-model",
+    ocr_model="cct-xs-v1-global-model",
 )
 
-# The "assets/test_image.png" can be found in repo root dit
+# The "assets/test_image.png" can be found in repo root dir
 # You can also pass a NumPy array containing cropped plate image
 alpr_results = alpr.predict("assets/test_image.png")
 print(alpr_results)
@@ -39,7 +39,7 @@ from fast_alpr import ALPR
 # Initialize the ALPR
 alpr = ALPR(
     detector_model="yolo-v9-t-384-license-plate-end2end",
-    ocr_model="global-plates-mobile-vit-v2-model",
+    ocr_model="cct-xs-v1-global-model",
 )
 
 # Load the image

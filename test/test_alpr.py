@@ -6,6 +6,8 @@ from pathlib import Path
 
 import cv2
 import pytest
+from fast_plate_ocr.inference.hub import OcrModel
+from open_image_models.detection.core.hub import PlateDetectorModel
 
 from fast_alpr.alpr import ALPR
 
@@ -15,11 +17,27 @@ ASSETS_DIR = Path(__file__).resolve().parent.parent / "assets"
 @pytest.mark.parametrize(
     "img_path, expected_plates", [(ASSETS_DIR / "test_image.png", {"5AU5341"})]
 )
-def test_default_alpr(img_path: Path, expected_plates: set[str]) -> None:
+@pytest.mark.parametrize("detector_model", ["yolo-v9-t-384-license-plate-end2end"])
+@pytest.mark.parametrize(
+    "ocr_model",
+    [
+        "cct-xs-v1-global-model",
+        "cct-s-v1-global-model",
+        "global-plates-mobile-vit-v2-model",
+        "european-plates-mobile-vit-v2-model",
+    ],
+)
+def test_default_alpr(
+    img_path: Path,
+    expected_plates: set[str],
+    detector_model: PlateDetectorModel,
+    ocr_model: OcrModel,
+) -> None:
+    # pylint: disable=too-many-locals
     im = cv2.imread(str(img_path))
     alpr = ALPR(
-        detector_model="yolo-v9-t-384-license-plate-end2end",
-        ocr_model="global-plates-mobile-vit-v2-model",
+        detector_model=detector_model,
+        ocr_model=ocr_model,
     )
     actual_result = alpr.predict(im)
     actual_plates = {x.ocr.text for x in actual_result if x.ocr is not None}

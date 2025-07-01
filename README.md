@@ -1,6 +1,7 @@
 # FastALPR
 
-[![Actions status](https://github.com/ankandrew/fast-alpr/actions/workflows/main.yaml/badge.svg)](https://github.com/ankandrew/fast-alpr/actions)
+[![Actions status](https://github.com/ankandrew/fast-alpr/actions/workflows/test.yaml/badge.svg)](https://github.com/ankandrew/fast-alpr/actions)
+[![Actions status](https://github.com/ankandrew/fast-alpr/actions/workflows/release.yaml/badge.svg)](https://github.com/ankandrew/fast-alpr/actions)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
@@ -42,14 +43,25 @@ model of your choice.
 
 ## 📦 Installation
 
-```bash
-pip install fast-alpr
+```shell
+pip install fast-alpr[onnx-gpu]
 ```
+
+By default, **no ONNX runtime is installed**. To run inference, you **must** install at least one ONNX backend using an appropriate extra.
+
+| Platform/Use Case  | Install Command                        | Notes                |
+|--------------------|----------------------------------------|----------------------|
+| CPU (default)      | `pip install fast-alpr`[onnx]`          | Cross-platform       |
+| NVIDIA GPU (CUDA)  | `pip install fast-alpr`[onnx-gpu]`      | Linux/Windows        |
+| Intel (OpenVINO)   | `pip install fast-alpr`[onnx-openvino]` | Best on Intel CPUs   |
+| Windows (DirectML) | `pip install fast-alpr`[onnx-directml]` | For DirectML support |
+| Qualcomm (QNN)     | `pip install fast-alpr`[onnx-qnn]`      | Qualcomm chipsets    |
+
 
 ## 🚀 Quick Start
 
 > [!TIP]
-> Try `fast-plate-ocr` pre-trained models in [Hugging Spaces](https://huggingface.co/spaces/ankandrew/fast-alpr).
+> Try `fast-alpr` in [Hugging Spaces](https://huggingface.co/spaces/ankandrew/fast-alpr).
 
 Here's how to get started with FastALPR:
 
@@ -59,10 +71,10 @@ from fast_alpr import ALPR
 # You can also initialize the ALPR with custom plate detection and OCR models.
 alpr = ALPR(
     detector_model="yolo-v9-t-384-license-plate-end2end",
-    ocr_model="global-plates-mobile-vit-v2-model",
+    ocr_model="cct-xs-v1-global-model",
 )
 
-# The "assets/test_image.png" can be found in repo root dit
+# The "assets/test_image.png" can be found in repo root dir
 alpr_results = alpr.predict("assets/test_image.png")
 print(alpr_results)
 ```
@@ -81,7 +93,7 @@ from fast_alpr import ALPR
 # Initialize the ALPR
 alpr = ALPR(
     detector_model="yolo-v9-t-384-license-plate-end2end",
-    ocr_model="global-plates-mobile-vit-v2-model",
+    ocr_model="cct-xs-v1-global-model",
 )
 
 # Load the image
@@ -163,9 +175,9 @@ To start contributing or to begin development, you can follow these steps:
     ```shell
     git clone https://github.com/ankandrew/fast-alpr.git
     ```
-2. Install all dependencies using [Poetry](https://python-poetry.org/docs/#installation):
+2. Install all dependencies (make sure you have [Poetry](https://python-poetry.org/docs/#installation) installed):
     ```shell
-    poetry install --all-extras
+    make install
     ```
 3. To ensure your changes pass linting and tests before submitting a PR:
     ```shell
