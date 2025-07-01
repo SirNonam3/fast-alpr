@@ -6,6 +6,7 @@ SRC_PATHS := fast_alpr/ test/
 help:
 	@echo "Available targets:"
 	@echo "  help             : Show this help message"
+	@echo "  install          : Install project with all required dependencies"
 	@echo "  format           : Format code using Ruff format"
 	@echo "  check_format     : Check code formatting with Ruff format"
 	@echo "  ruff             : Run Ruff linter"
@@ -15,6 +16,11 @@ help:
 	@echo "  test             : Run tests using pytest"
 	@echo "  checks           : Check format, lint, and test"
 	@echo "  clean            : Clean up caches and build artifacts"
+
+.PHONY: install
+install:
+	@echo "==> Installing project with all required dependencies..."
+	poetry install --with dev,test,docs --extras onnx
 
 .PHONY: format
 format:
