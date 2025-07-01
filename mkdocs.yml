@@ -5,14 +5,19 @@ repo_url: https://github.com/ankandrew/fast-alpr
 theme:
   name: material
   features:
-    - navigation.instant
-    - navigation.instant.progress
-    - search.suggest
-    - navigation.sections
-    - navigation.expand
-    - search.highlight
     - content.code.copy
     - content.code.select
+    - content.footnote.tooltips
+    - header.autohide
+    - navigation.expand
+    - navigation.footer
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.sections
+    - search.highlight
+    - search.suggest
+    - toc.follow
   palette:
     - scheme: default
       toggle:
@@ -24,6 +29,7 @@ theme:
         name: Switch to light mode
 nav:
   - Introduction: index.md
+  - Installation: installation.md
   - Quick Start: quick_start.md
   - Custom Models: custom_models.md
   - Contributing: contributing.md

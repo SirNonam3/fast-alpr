@@ -43,14 +43,25 @@ model of your choice.
 
 ## 📦 Installation
 
-```bash
-pip install fast-alpr
+```shell
+pip install fast-alpr[onnx-gpu]
 ```
+
+By default, **no ONNX runtime is installed**. To run inference, you **must** install at least one ONNX backend using an appropriate extra.
+
+| Platform/Use Case  | Install Command                        | Notes                |
+|--------------------|----------------------------------------|----------------------|
+| CPU (default)      | `pip install fast-alpr`[onnx]`          | Cross-platform       |
+| NVIDIA GPU (CUDA)  | `pip install fast-alpr`[onnx-gpu]`      | Linux/Windows        |
+| Intel (OpenVINO)   | `pip install fast-alpr`[onnx-openvino]` | Best on Intel CPUs   |
+| Windows (DirectML) | `pip install fast-alpr`[onnx-directml]` | For DirectML support |
+| Qualcomm (QNN)     | `pip install fast-alpr`[onnx-qnn]`      | Qualcomm chipsets    |
+
 
 ## 🚀 Quick Start
 
 > [!TIP]
-> Try `fast-plate-ocr` pre-trained models in [Hugging Spaces](https://huggingface.co/spaces/ankandrew/fast-alpr).
+> Try `fast-alpr` in [Hugging Spaces](https://huggingface.co/spaces/ankandrew/fast-alpr).
 
 Here's how to get started with FastALPR:
 
