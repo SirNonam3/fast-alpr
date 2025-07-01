@@ -1,6 +1,7 @@
 # FastALPR
 
-[![Actions status](https://github.com/ankandrew/fast-alpr/actions/workflows/main.yaml/badge.svg)](https://github.com/ankandrew/fast-alpr/actions)
+[![Actions status](https://github.com/ankandrew/fast-alpr/actions/workflows/test.yaml/badge.svg)](https://github.com/ankandrew/fast-alpr/actions)
+[![Actions status](https://github.com/ankandrew/fast-alpr/actions/workflows/release.yaml/badge.svg)](https://github.com/ankandrew/fast-alpr/actions)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
