@@ -51,11 +51,11 @@ By default, **no ONNX runtime is installed**. To run inference, you **must** ins
 
 | Platform/Use Case  | Install Command                        | Notes                |
 |--------------------|----------------------------------------|----------------------|
-| CPU (default)      | `pip install fast-alpr`[onnx]`          | Cross-platform       |
-| NVIDIA GPU (CUDA)  | `pip install fast-alpr`[onnx-gpu]`      | Linux/Windows        |
-| Intel (OpenVINO)   | `pip install fast-alpr`[onnx-openvino]` | Best on Intel CPUs   |
-| Windows (DirectML) | `pip install fast-alpr`[onnx-directml]` | For DirectML support |
-| Qualcomm (QNN)     | `pip install fast-alpr`[onnx-qnn]`      | Qualcomm chipsets    |
+| CPU (default)      | `pip install fast-alpr[onnx]`          | Cross-platform       |
+| NVIDIA GPU (CUDA)  | `pip install fast-alpr[onnx-gpu]`      | Linux/Windows        |
+| Intel (OpenVINO)   | `pip install fast-alpr[onnx-openvino]` | Best on Intel CPUs   |
+| Windows (DirectML) | `pip install fast-alpr[onnx-directml]` | For DirectML support |
+| Qualcomm (QNN)     | `pip install fast-alpr[onnx-qnn]`      | Qualcomm chipsets    |
 
 
 ## 🚀 Quick Start
