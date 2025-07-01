@@ -55,6 +55,7 @@ mypy = "*"
 ruff = "*"
 pylint = "*"
 types-pyyaml = "*"
+yamllint = "*"
 
 [tool.poetry.group.docs.dependencies]
 mkdocs-material = "*"
