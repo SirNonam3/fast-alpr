@@ -74,8 +74,9 @@ class DefaultOCR(BaseOCR):
         """
         if cropped_plate is None:
             return None
-        gray_plate = cv2.cvtColor(cropped_plate, cv2.COLOR_BGR2GRAY)
-        plate_text, probabilities = self.ocr_model.run(gray_plate, return_confidence=True)
+        if self.ocr_model.config.image_color_mode == "grayscale":
+            cropped_plate = cv2.cvtColor(cropped_plate, cv2.COLOR_BGR2GRAY)
+        plate_text, probabilities = self.ocr_model.run(cropped_plate, return_confidence=True)
         if not isinstance(plate_text, list):
             raise TypeError(f"Expected plate_text to be a list, got {type(plate_text).__name__}")
         if not isinstance(probabilities, np.ndarray):
