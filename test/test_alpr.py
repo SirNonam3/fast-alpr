@@ -44,6 +44,7 @@ def test_default_alpr(
 ) -> None:
     # pylint: disable=too-many-locals
     im = cv2.imread(str(img_path))
+    assert im is not None, "Failed to load test image"
     alpr = ALPR(
         detector_model=detector_model,
         ocr_model=ocr_model,
