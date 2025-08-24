@@ -216,7 +216,7 @@ requires-dist = [
     { name = "onnxruntime-openvino", marker = "extra == 'onnx-openvino'", specifier = ">=1.19.2" },
     { name = "onnxruntime-qnn", marker = "extra == 'onnx-qnn'", specifier = ">=1.19.2" },
     { name = "open-image-models", specifier = ">=0.4.0" },
-    { name = "opencv-python-headless" },
+    { name = "opencv-python-headless", specifier = ">=4.9.0.80" },
 ]
 provides-extras = ["onnx", "onnx-gpu", "onnx-openvino", "onnx-directml", "onnx-qnn"]
 
