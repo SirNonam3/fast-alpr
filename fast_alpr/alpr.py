@@ -110,17 +110,19 @@ class ALPR:
         """
         if isinstance(frame, str):
             img_path = frame
-            frame = cv2.imread(img_path)
-            if frame is None:
+            img = cv2.imread(img_path)
+            if img is None:
                 raise ValueError(f"Failed to load image from path: {img_path}")
+        else:
+            img = frame
 
-        plate_detections = self.detector.predict(frame)
-        alpr_results = []
+        plate_detections = self.detector.predict(img)
+        alpr_results: list[ALPRResult] = []
         for detection in plate_detections:
             bbox = detection.bounding_box
             x1, y1 = max(bbox.x1, 0), max(bbox.y1, 0)
-            x2, y2 = min(bbox.x2, frame.shape[1]), min(bbox.y2, frame.shape[0])
-            cropped_plate = frame[y1:y2, x1:x2]
+            x2, y2 = min(bbox.x2, img.shape[1]), min(bbox.y2, img.shape[0])
+            cropped_plate = img[y1:y2, x1:x2]
             ocr_result = self.ocr.predict(cropped_plate)
             alpr_result = ALPRResult(detection=detection, ocr=ocr_result)
             alpr_results.append(alpr_result)
@@ -139,12 +141,14 @@ class ALPR:
         # If frame is a string, assume it's an image path and load it
         if isinstance(frame, str):
             img_path = frame
-            frame = cv2.imread(img_path)
-            if frame is None:
+            img = cv2.imread(img_path)
+            if img is None:
                 raise ValueError(f"Failed to load image from path: {img_path}")
+        else:
+            img = frame
 
-        # Get ALPR results
-        alpr_results = self.predict(frame)
+        # Get ALPR results using the ndarray
+        alpr_results = self.predict(img)
 
         for result in alpr_results:
             detection = result.detection
@@ -152,7 +156,7 @@ class ALPR:
             bbox = detection.bounding_box
             x1, y1, x2, y2 = bbox.x1, bbox.y1, bbox.x2, bbox.y2
             # Draw the bounding box
-            cv2.rectangle(frame, (x1, y1), (x2, y2), (36, 255, 12), 2)
+            cv2.rectangle(img, (x1, y1), (x2, y2), (36, 255, 12), 2)
             if ocr_result is None or not ocr_result.text or not ocr_result.confidence:
                 continue
             # Remove padding symbols if any
@@ -166,7 +170,7 @@ class ALPR:
             font_scale = 1.25
             # Draw black background for better readability
             cv2.putText(
-                img=frame,
+                img=img,
                 text=display_text,
                 org=(x1, y1 - 10),
                 fontFace=cv2.FONT_HERSHEY_SIMPLEX,
@@ -177,7 +181,7 @@ class ALPR:
             )
             # Draw white text
             cv2.putText(
-                img=frame,
+                img=img,
                 text=display_text,
                 org=(x1, y1 - 10),
                 fontFace=cv2.FONT_HERSHEY_SIMPLEX,
@@ -186,4 +190,5 @@ class ALPR:
                 thickness=2,
                 lineType=cv2.LINE_AA,
             )
-        return frame
+
+        return img

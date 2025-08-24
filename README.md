@@ -102,14 +102,9 @@ frame = cv2.imread(image_path)
 
 # Draw predictions on the image
 annotated_frame = alpr.draw_predictions(frame)
-
-# Display the result
-cv2.imshow("ALPR Result", annotated_frame)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 ```
 
-Output:
+Annotated frame:
 
 <img alt="ALPR Draw Predictions" src="https://raw.githubusercontent.com/ankandrew/fast-alpr/0a6076dcb8d9084514fe47e8abaaeb77cae45f8e/assets/alpr_draw_predictions.png"/>
 
@@ -175,7 +170,7 @@ To start contributing or to begin development, you can follow these steps:
     ```shell
     git clone https://github.com/ankandrew/fast-alpr.git
     ```
-2. Install all dependencies (make sure you have [Poetry](https://python-poetry.org/docs/#installation) installed):
+2. Install all dependencies (make sure you have [uv](https://docs.astral.sh/uv/getting-started/installation/) installed):
     ```shell
     make install
     ```
