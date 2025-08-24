@@ -1,6 +1,6 @@
 [project]
 name = "fast-alpr"
-version = "0.2.0"
+version = "0.3.0"
 description = "Fast Automatic License Plate Recognition."
 authors = [{ name = "ankandrew", email = "61120139+ankandrew@users.noreply.github.com" }]
 requires-python = ">=3.10,<4.0"
@@ -29,9 +29,9 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "opencv-python>=4.9.0.80",
     "fast-plate-ocr>=1.0.0",
     "open-image-models>=0.4.0",
+    "opencv-python-headless",
 ]
 
 [project.optional-dependencies]
