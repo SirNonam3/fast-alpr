@@ -8,7 +8,7 @@ alpr = ALPR(
 )
 
 # Load the test image (adjust path if needed)
-image = cv2.imread("testfoto.jpg")
+image = cv2.imread("test_image.png")
 
 # Run prediction
 results = alpr.predict(image)

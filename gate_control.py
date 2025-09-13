@@ -1,16 +1,10 @@
 import cv2
 from fast_alpr import ALPR
 
-import relaylib
 
-def trigger_gate():
-    relay = relaylib.Relay(port="COM3")
-    relay.on(1)   # close relay contact
-    time.sleep(1)
-    relay.off(1)  # open relay contact
 
 # Plates allowed to open the gate
-AUTHORIZED_PLATES = {"5AU5341", "34ABC123", "06XYZ789"}
+AUTHORIZED_PLATES = {"5AU5341", "34ABC123", "06XYZ789", }
 
 # Initialize ALPR
 alpr = ALPR(
@@ -41,9 +35,9 @@ while cap.isOpened():
         print(f"Detected: {plate} (conf: {confidence:.2f})")
 
         # Check against authorized list
-        if plate in AUTHORIZED_PLATES and confidence > 0.9:
+        if plate in AUTHORIZED_PLATES and confidence > 0.90:
             print(f"✅ Gate Opened for {plate}")
-            trigger_gate()
+           
             # ---- PLACE YOUR GATE CONTROL CODE HERE ----
             # e.g., send a signal to a relay, API call, etc.
             # trigger_gate()
